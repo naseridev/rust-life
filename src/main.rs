@@ -1,4 +1,3 @@
-use clearscreen;
 use rand::Rng;
 use std::thread;
 use std::time::Duration;
@@ -41,11 +40,8 @@ fn evolution(world: &mut World) {
                 }
             }
 
-            new_world[y][x] = match (world[y][x], neighbors) {
-                (true, 2) | (true, 3) => true,
-                (false, 3) => true,
-                _ => false,
-            };
+            new_world[y][x] =
+                matches!((world[y][x], neighbors), (true, 2) | (true, 3) | (false, 3));
         }
     }
 
